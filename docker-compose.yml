@@ -4,6 +4,7 @@ services:
     container_name: faszt-com
     build:
       context: .
-      target: app
+      target: final
     ports:
-      - 8080:8080
+      - '3000:3000'
+      - '3001:3001'

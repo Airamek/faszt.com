@@ -11,12 +11,21 @@ RUN npm install
 RUN npm run build
 
 
+
 FROM ghcr.io/librespeed/speedtest:$VERSION AS app
 
-COPY ./app/entrypoint.sh /
 COPY --from=build /home/node/app/dist /speedtest/
 RUN ls /speedtest/
 RUN mv /speedtest/index.php /speedtest/ui.php
 
+
+FROM openspeedtest/latest:v2.0.6 AS final
+
+USER root
+RUN apk add --no-cache php82 php82-fpm php82-opcache php82-mysqli php82-json php82-openssl php82-ctype php82-phar
+
+COPY ./app/entrypoint.sh /
+COPY --from=app /speedtest /speedtest
+ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
 ENV DISABLE_IPINFO=true
 ENV TITLE=Faszt.com

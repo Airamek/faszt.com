@@ -11,11 +11,11 @@
 		// Inject test server list (or url) and title into javascript
 		$mode = getenv("MODE");
 		if ($mode == "standalone" || $mode == "dual") { ?>
-			var SPEEDTEST_SERVERS = []
+			var SPEEDTEST_SERVERS = [];
 		<?php } else { ?>
-			var SPEEDTEST_SERVERS = <?= file_get_contents('/servers.json') ?: '[]' ?>
+			var SPEEDTEST_SERVERS = <?= file_get_contents('/servers.json') ?: '[]' ?>;
 		<?php } ?>
-		var TITLE = '<?= getenv('TITLE') ?: 'LibreSpeed' ?>'
+		var TITLE = '<?= getenv('TITLE') ?: 'LibreSpeed' ?>';
 	</script>
 
 	<script type="module" src="resources/js/app.js"></script>
