@@ -138,16 +138,6 @@ if [ "$DOMAIN_NAME" ]; then
 sed -i "/\bYOURDOMAIN\b/c\ server_name _ localhost ${DOMAIN_NAME};" "${CONFIG}"
 fi
 
-# Make sure ACME challenge paths are served from webroot
-mkdir -p /usr/share/nginx/html/.well-known/acme-challenge
-if ! grep -q "location \^~ /.well-known/acme-challenge/" "${CONFIG}"; then
-  sed -i '/location \/ {/i\
-        location ^~ /.well-known/acme-challenge/ {\
-            root /usr/share/nginx/html;\
-            try_files $uri =404;\
-        }' "${CONFIG}"
-fi
-
 # Update nginx index directive to prefer index.php
 sed -i 's/index index\.html;/index index.php index.html;/' "${CONFIG}"
 
