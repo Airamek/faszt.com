@@ -1,5 +1,7 @@
 #!/bin/sh
 
+CONFIG=${CONFIG:-/etc/nginx/conf.d/OpenSpeedTest-Server.conf}
+INDEX_HTML=${INDEX_HTML:-/usr/share/nginx/html/index.html}
 
 # Cleanup
 rm -rf /usr/share/nginx/html/*

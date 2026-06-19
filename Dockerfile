@@ -22,7 +22,7 @@ RUN mv /speedtest/index.php /speedtest/ui.php
 FROM openspeedtest/latest:v2.0.6 AS final
 
 USER root
-RUN apk add --no-cache php82 php82-fpm php82-opcache php82-mysqli php82-json php82-openssl php82-ctype php82-phar
+RUN apk add --no-cache php82 php82-fpm php82-opcache php82-mysqli php82-json php82-openssl php82-ctype php82-phar certbot
 
 COPY ./app/entrypoint.sh /
 COPY --from=app /speedtest /speedtest
